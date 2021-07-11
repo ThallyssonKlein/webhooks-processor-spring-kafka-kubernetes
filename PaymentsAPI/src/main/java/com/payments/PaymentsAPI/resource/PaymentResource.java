@@ -1,5 +1,6 @@
 package com.payments.PaymentsAPI.resource;
 
+import com.payments.PaymentsAPI.Payment;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import com.payments.PaymentsAPI.entity.Payment;
 import com.payments.PaymentsAPI.service.PaymentService;
 
 @RestController

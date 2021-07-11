@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @AllArgsConstructor
@@ -22,7 +24,11 @@ public class Payment implements Serializable {
         ELO
     }
 
-    private String personName;
+    @NotNull
+    @NotEmpty
+    private String person;
+    @NotNull
     private Double value;
-    private Flag flag; 
+    @NotNull
+    private Flag flag;
 }
