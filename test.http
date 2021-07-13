@@ -1,0 +1,8 @@
+POST http://0.0.0.0:8080/api/v1/payment
+Content-Type: application/json
+
+{
+    "person" : "Thallysson",
+    "value" : 4.25,
+    "flag" : "MASTERCARD"
+}
