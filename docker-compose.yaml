@@ -1,4 +1,5 @@
-version: '3'
+version: "3"
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -35,23 +36,38 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
 
-    paymentsapi:
-        container_name: paymentsapi
-        build: ./PaymentsAPI
-        restart: on-failure
-        depends_on:
-            - kafdrop
-            - kafka
-            - zookeeper
-        links:
-            - kafdrop
-            - kafka
-            - zookeeper
-        networks:
-            - broker-kafka
-        ports:
-            - 8080:8080
-    
+  paymentsapi:
+    container_name: paymentsapi
+    build: ./PaymentsAPI
+    restart: on-failure
+    depends_on:
+      - kafdrop
+      - kafka
+      - zookeeper
+    links:
+      - kafdrop
+      - kafka
+      - zookeeper
+    networks:
+      - broker-kafka
+    ports:
+      - 8080:8080
+  webhooksprocessor:
+    container_name: webhooksprocessor
+    build: ./WebhooksProcessor
+    restart: on-failure
+    depends_on:
+      - kafdrop
+      - kafka
+      - zookeeper
+    links:
+      - kafdrop
+      - kafka
+      - zookeeper
+    networks:
+      - broker-kafka
+    ports:
+      - 8081:8081
 
 networks:
   broker-kafka:

@@ -15,6 +15,6 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void sendPaymentEvent(Payment payment) {
-        producerService.sendMessage(payment.);
+        producerService.sendMessage(payment);
     }
 }
