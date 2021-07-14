@@ -25,30 +25,30 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  paymentsapi:
-    container_name: paymentsapi
-    build: ./PaymentsAPI
-    restart: on-failure
-    depends_on:
-      - kafka
-    links:
-      - kafka
-    networks:
-      - broker-kafka
-    ports:
-      - 8080:8080
-  webhooksprocessor:
-    container_name: webhooksprocessor
-    build: ./WebhooksProcessor
-    restart: on-failure
-    depends_on:
-      - kafka
-    links:
-      - kafka
-    networks:
-      - broker-kafka
-    ports:
-      - 8081:8081
+      #  paymentsapi:
+      #    container_name: paymentsapi
+      #    build: ./PaymentsAPI
+      #    restart: on-failure
+      #    depends_on:
+      # - kafka
+      #    links:
+      #- kafka
+      #    networks:
+      # - broker-kafka
+      #    ports:
+      #- 8080:8080
+      #  webhooksprocessor:
+      #    container_name: webhooksprocessor
+      #    build: ./WebhooksProcessor
+      #    restart: on-failure
+      #    depends_on:
+      #      - kafka
+      #    links:
+      #      - kafka
+      #    networks:
+      # - broker-kafka
+      #    ports:
+      # - 8081:8081
 
 networks:
   broker-kafka:

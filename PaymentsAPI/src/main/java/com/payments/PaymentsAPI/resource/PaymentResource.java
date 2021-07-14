@@ -10,6 +10,8 @@ import javax.validation.Valid;
 
 import com.payments.PaymentsAPI.service.PaymentService;
 
+import java.util.concurrent.ExecutionException;
+
 @RestController
 @RequestMapping(value = "/api")
 @Api(value = "Recurso de pagamento")
@@ -21,7 +23,7 @@ public class PaymentResource {
 
     @PostMapping("/v1/payment")
     @ApiOperation(value = "Cria um novo pagamento")
-    public Payment postPayment(@Valid @RequestBody Payment payment){
+    public Payment postPayment(@Valid @RequestBody Payment payment) throws ExecutionException, InterruptedException {
         paymentService.sendPaymentEvent(payment);
         return payment;
     }
