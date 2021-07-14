@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class WebhooksProcessorApplication {
 
 	@Autowired
-	private ConsumerService consumerService;
+	private static ConsumerService consumerService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(WebhooksProcessorApplication.class, args);
