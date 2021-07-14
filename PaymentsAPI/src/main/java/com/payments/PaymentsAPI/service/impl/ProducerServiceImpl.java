@@ -31,9 +31,7 @@ public final class ProducerServiceImpl implements ProducerService {
     
     @Override
     public void sendMessage(Payment message) throws ExecutionException, InterruptedException {
-        var key = "TEMPERATURA";
-        var value = "34º";
-        var record = new ProducerRecord<String, String>("EXEMPLO_TOPICO", key, value);
+        var record = new ProducerRecord<String, String>("EXEMPLO_TOPICO", message.getFlag(), gson.toJson(message));
         Callback callback = (data, ex) -> {
             if (ex != null) {
                 ex.printStackTrace();

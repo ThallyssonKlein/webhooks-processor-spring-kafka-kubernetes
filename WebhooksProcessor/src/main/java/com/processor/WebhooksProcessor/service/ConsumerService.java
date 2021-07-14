@@ -1,5 +1,5 @@
 package com.processor.WebhooksProcessor.service;
 
 public interface ConsumerService {
-    void consume(String message);
+    void consume();
 }
