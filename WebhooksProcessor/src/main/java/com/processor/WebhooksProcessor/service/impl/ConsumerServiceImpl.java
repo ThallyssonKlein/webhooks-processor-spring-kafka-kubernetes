@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
+import com.processor.WebhooksProcessor.entity.Payment;
 import com.processor.WebhooksProcessor.service.ConsumerService;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -20,6 +21,7 @@ public final class ConsumerServiceImpl implements ConsumerService {
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, Payment.class.getName());
         return properties;
     }
     
