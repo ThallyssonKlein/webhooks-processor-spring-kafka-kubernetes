@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
-import java.util.TimeZone;
 
 @Configuration
 @EnableAutoConfiguration

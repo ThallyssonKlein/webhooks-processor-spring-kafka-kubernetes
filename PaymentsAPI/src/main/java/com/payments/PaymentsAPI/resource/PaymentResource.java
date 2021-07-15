@@ -3,14 +3,11 @@ package com.payments.PaymentsAPI.resource;
 import com.payments.PaymentsAPI.entity.Payment;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import com.payments.PaymentsAPI.service.PaymentService;
-
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -23,7 +20,7 @@ public class PaymentResource {
 
     @PostMapping("/v1/payment")
     @ApiOperation(value = "Cria um novo pagamento")
-    public Payment postPayment(@Valid @RequestBody Payment payment) throws ExecutionException, InterruptedException {
+    public Payment postPayment(@Valid @RequestBody Payment payment) {
         paymentService.sendPaymentEvent(payment);
         return payment;
     }

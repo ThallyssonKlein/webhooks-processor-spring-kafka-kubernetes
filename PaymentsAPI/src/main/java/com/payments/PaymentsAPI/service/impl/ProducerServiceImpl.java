@@ -25,6 +25,7 @@ public final class ProducerServiceImpl implements ProducerService {
     
     private Gson gson = new Gson();
     private KafkaProducer<String,String> producer = new KafkaProducer<String,String>(properties());
+    
     private final String webhooks_hostname = "http://localhost";
     private URL url;
 
@@ -66,10 +67,10 @@ public final class ProducerServiceImpl implements ProducerService {
     @Override
     public void sendMessage(Payment message) {
         try {
-            var record = new ProducerRecord<String, String>("EXEMPLO_TOPICO", message.getFlag().name(), gson.toJson(message));
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>("EXEMPLO_TOPICO", message.getFlag().name(), gson.toJson(message));
             Callback callback = (data, ex) -> {
                 if (ex != null) {
-                    ex.printStackTrace();
+                    System.out.println("Erro ao enviar a mensagem");
                     return;
                 }
                 System.out.println("Mensagem enviada com sucesso para: " + data.topic() + " | partition " + data.partition() + "| offset " + data.offset() + "| tempo " + data.timestamp());
