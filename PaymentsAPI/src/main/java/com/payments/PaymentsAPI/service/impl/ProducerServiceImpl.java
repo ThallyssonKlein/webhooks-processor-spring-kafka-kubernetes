@@ -37,32 +37,32 @@ public final class ProducerServiceImpl implements ProducerService {
         return properties;
     }
     
-    // public void sendRequest(String port, String body){
-    //     Request request = new Request.Builder().method("POST", body)
-    //         .url(webhooks_hostname + ":" + port + "/")
-    //         .build();
-    //     OkHttpClient httpClient = new OkHttpClient();
-    //     try
-    //     {
-    //         Response response = httpClient.newBuilder()
-    //         .readTimeout(1, TimeUnit.SECONDS)
-    //         .build()
-    //         .newCall(request)
-    //         .execute();
-    //         if(response.isSuccessful())
-    //         {
-    //             // notification about succesful request
-    //         }
-    //         else
-    //         {
-    //             // notification about failure request
-    //         }
-    //     }
-    //     catch (IOException e1)
-    //     {
-    //         // notification about other problems
-    //     }
-    // }
+    public void sendRequest(String port, String body){
+        Request request = new Request.Builder().method("POST", body)
+            .url(webhooks_hostname + ":" + port + "/")
+            .build();
+        OkHttpClient httpClient = new OkHttpClient();
+        try
+        {
+            Response response = httpClient.newBuilder()
+            .readTimeout(1, TimeUnit.SECONDS)
+            .build()
+            .newCall(request)
+            .execute();
+            if(response.isSuccessful())
+            {
+                // notification about succesful request
+            }
+            else
+            {
+                // notification about failure request
+            }
+        }
+        catch (IOException e1)
+        {
+            // notification about other problems
+        }
+    }
     
     @Override
     public void sendMessage(Payment message) {
