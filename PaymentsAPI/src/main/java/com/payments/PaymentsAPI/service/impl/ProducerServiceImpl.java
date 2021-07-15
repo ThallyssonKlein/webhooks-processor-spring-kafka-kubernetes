@@ -23,7 +23,7 @@ public final class ProducerServiceImpl implements ProducerService {
 
     private static Properties properties() {
         var properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.102.217.31:9092");
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "broker-1:9092");
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         return properties;
@@ -32,7 +32,7 @@ public final class ProducerServiceImpl implements ProducerService {
     @Override
     public void sendMessage(Payment message) {
         try {
-            ProducerRecord<String, String> record = new ProducerRecord<String, String>("EXEMPLO_TOPICO", message.getFlag().name(), gson.toJson(message));
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>("consumer-hooks-pagamentos", message.getFlag().name(), gson.toJson(message));
             Callback callback = (data, ex) -> {
                 if (ex != null) {
                     System.out.println("Erro ao enviar a mensagem");

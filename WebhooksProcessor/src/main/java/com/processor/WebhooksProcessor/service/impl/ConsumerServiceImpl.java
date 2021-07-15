@@ -29,7 +29,7 @@ public final class ConsumerServiceImpl implements ConsumerService {
 
     private static Properties properties() {
         var properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.102.217.31:9092");
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "broker-1:9092");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
@@ -55,7 +55,7 @@ public final class ConsumerServiceImpl implements ConsumerService {
     @Override
     public void consume() {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties());
-        consumer.subscribe(Collections.singletonList("EXEMPLO_TOPICO"));
+        consumer.subscribe(Collections.singletonList("consumer-hooks-pagamentos"));
     
         while (true) {
             try {

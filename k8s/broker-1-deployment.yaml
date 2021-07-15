@@ -55,6 +55,8 @@ spec:
               value: "1"
             - name: KAFKA_ZOOKEEPER_CONNECT
               value: zookeeper:2181
+            - name: KAFKA_CREATE_TOPICS
+              value: "consumer-hooks-pagamentos1:1:1"
           image: confluentinc/cp-enterprise-kafka:4.1.0
           name: broker-1
           ports:
