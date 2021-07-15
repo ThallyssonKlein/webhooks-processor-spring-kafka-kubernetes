@@ -15,7 +15,7 @@ import java.io.Serializable;
 @ToString
 public class Payment implements Serializable {
     
-    private enum Flag{
+    public enum Flag{
         MASTERCARD,
         VISA,
         AMERICAN_EXPRESS,

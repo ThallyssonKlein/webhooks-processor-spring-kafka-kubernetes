@@ -9,6 +9,7 @@ import com.processor.WebhooksProcessor.service.ConsumerService;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public final class ConsumerServiceImpl implements ConsumerService {
 
     private static Properties properties() {
         var properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.102.217.31:9092");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
@@ -58,9 +59,9 @@ public final class ConsumerServiceImpl implements ConsumerService {
     
         while (true) {
             try {
-                ConsumerRecord<String, String> records = consumer.poll(Duration.ofMillis(100));
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> registro : records) {
-                    Payment pay = gson.fromJson(registro.value());
+                    Payment pay = gson.fromJson(registro.value(), Payment.class);
                     switch(pay.getFlag().name()){
                         case "MASTERCARD":
                             sendRequest("8082", pay.getFlag().name());
