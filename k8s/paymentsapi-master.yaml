@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paymentsapi
+  labels:
+    app: paymentsapi
+spec:
+  selector:
+    matchLabels:
+      app: paymentsapi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: paymentsapi
+        role: master
+    spec:
+      containers:
+        - name: master
+          image: thallyssonklein/webhooks-processor
+          ports:
+            - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: paymentsapiservice
+  labels:
+    app: paymentsapiservice
+    role: master
+spec:
+  ports:
+    - port: 9092
+      targetPort: 9092
+  selector:
+    app: paymentsapi
+    role: master

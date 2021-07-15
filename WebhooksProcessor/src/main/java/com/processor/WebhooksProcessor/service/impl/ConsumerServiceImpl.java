@@ -21,7 +21,7 @@ public final class ConsumerServiceImpl implements ConsumerService {
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, Payment.class.getName());
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         return properties;
     }
     
