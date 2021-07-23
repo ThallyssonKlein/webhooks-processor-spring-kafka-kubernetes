@@ -23,9 +23,11 @@ public final class ProducerServiceImpl implements ProducerService {
 
     private static Properties properties() {
         var properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "broker-1:9092");
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.106.90.91:9092");
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
+        properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_DOC, "true");
         return properties;
     }
     
@@ -35,14 +37,14 @@ public final class ProducerServiceImpl implements ProducerService {
             ProducerRecord<String, String> record = new ProducerRecord<String, String>("consumer-hooks-pagamentos", message.getFlag().name(), gson.toJson(message));
             Callback callback = (data, ex) -> {
                 if (ex != null) {
-                    System.out.println("Erro ao enviar a mensagem");
+                    System.out.println(ex);
                     return;
                 }
                 System.out.println("Mensagem enviada com sucesso para: " + data.topic() + " | partition " + data.partition() + "| offset " + data.offset() + "| tempo " + data.timestamp());
             };
             producer.send(record, callback).get();
         } catch(ExecutionException | InterruptedException e){
-            System.out.println("error listening to kafka");
+            System.out.println("error sending to kafka");
         }
     }
 }

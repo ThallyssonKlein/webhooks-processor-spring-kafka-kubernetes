@@ -29,10 +29,10 @@ public final class ConsumerServiceImpl implements ConsumerService {
 
     private static Properties properties() {
         var properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "broker-1:9092");
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.106.90.91:9092");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "consumer-hooks-pagamentos-group");
         return properties;
     }
 
