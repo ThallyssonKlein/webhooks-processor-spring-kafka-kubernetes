@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: paymentsapi
+  name: paymentsapi
+spec:
+  containers:
+    - image: paymentsapi
+      name: paymentsapi
+      ports:
+        - containerPort: 8080
+      resources: {}
+  restartPolicy: OnFailure
+status: {}
