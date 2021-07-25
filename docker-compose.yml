@@ -12,5 +12,3 @@ services:
     container_name: webhooksprocessor
     build: ./WebhooksProcessor
     restart: on-failure
-    ports:
-      - 8081:8081

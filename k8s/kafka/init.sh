@@ -23,7 +23,15 @@ helm repo add incubator https://charts.helm.sh/incubator
 echo "10"
 curl https://raw.githubusercontent.com/helm/charts/master/incubator/kafka/values.yaml > values.yml
 echo "11"
+sleep 10s
 helm install --name kafka-demo --namespace kafka incubator/kafka -f values.yml --debug
 
 echo "12"
+kubectl create -f initialclient.yml
+
+echo "13"
+sleep 10s
 kubectl -n kafka exec -ti initialclient -- ./bin/kafka-topics.sh --zookeeper kafka-demo-zookeeper:2181 --topic consumer-hooks-pagamentos --create --partitions 5 --replication-factor 3
+
+echo "14"
+helm status kafka-demo

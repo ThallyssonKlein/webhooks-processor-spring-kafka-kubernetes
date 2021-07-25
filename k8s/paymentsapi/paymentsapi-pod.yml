@@ -10,7 +10,7 @@ metadata:
   name: paymentsapi
 spec:
   containers:
-    - image: paymentsapi
+    - image: thallyssonklein/webhooks-processor/paymentsapi
       name: paymentsapi
       ports:
         - containerPort: 8080
